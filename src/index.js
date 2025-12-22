@@ -1,14 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import App from './components/App';
+// import * as serviceWorker from './serviceWOrker';
 import reportWebVitals from './reportWebVitals';
+// import axios from 'axios';
+import reducers from './reducers';
+import {Provider} from 'react-redux';
+import {legacy_createStore as createStore, applyMiddleware} from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './sagas';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
+// axios.defaults.withCredentials = true;
+// axios.defaults.baseURL = 'https://rem.dbwebb.se/api';
+// đây là đường link gốc, khi cần gọi trả về một danh sách users thì chỉ cần thêm /users phía sau link
+// axios.get('/users');
+
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(reducers, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(rootSaga)
+
+// Chuẩn React 17 bị lỗi
+// ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'))
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <Provider store={store}>
+        <App />
+    </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
