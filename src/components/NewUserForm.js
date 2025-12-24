@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import {Form, FormGroup, Label, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+// import {Form, FormGroup, Label, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import { Button, Form, Input, Modal } from 'antd';
+import { UserAddOutlined } from '@ant-design/icons';
 
 class NewUserForm extends Component {
     state = {
@@ -43,7 +45,7 @@ class NewUserForm extends Component {
     render() {
         return (
             <div style={{marginBottom: '20px', display: 'flex', justifyContent: 'flex-end'}}>
-                <Button outline color='primary' onClick={this.handleShowForm}>
+                {/* <Button outline color='primary' onClick={this.handleShowForm}>
                         + Add User 
                 </Button>
                 <Modal isOpen={this.state.isOpen} toggle={this.handleShowForm} centered backdrop="static">
@@ -70,6 +72,40 @@ class NewUserForm extends Component {
                             </Button>
                         </ModalFooter>
                     </Form>
+                </Modal> */}
+                <Button type='primary' onClick={this.handleShowForm} icon={<UserAddOutlined />}>
+                    + Add User
+                </Button>
+                <Modal
+                    title="Create User"
+                    open={this.state.isOpen}
+                    onOk={this.handleSubmit}
+                    onCancel={this.handleShowForm}
+                    okText="Create"
+                    cancelText="Cancel"
+                    centered
+                    destroyOnHidden
+                >
+                    <Form layout='vertical'>
+                        <Form.Item label="First Name" required>
+                            <Input 
+                                placeholder='First Name'
+                                value={this.state.firstName}
+                                onChange={this.handleFirstNameChange}
+                                autoFocus
+                            />
+                        </Form.Item>
+
+                        <Form.Item label="Last Name" required>
+                            <Input 
+                                placeholder='Last Name'
+                                value={this.state.lastName}
+                                onChange={this.handleLastNameChange}
+                            />
+                        </Form.Item>
+
+                    </Form>
+
                 </Modal>
             </div>
         );

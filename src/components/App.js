@@ -33,7 +33,7 @@ class App extends Component {
   render() {
     const users = this.props.users;
     return (
-      <div style={{margin: '0 auto', padding: '20px', maxWidth: '600px'}}>
+      <div style={{padding: '20px'}}>
         <h1 style={{textAlign: 'center'}}>User Management</h1>
         {users.isLoading && (
             <div style={{

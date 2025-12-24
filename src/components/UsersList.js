@@ -62,7 +62,9 @@ const UsersList = ({users, onDeleteUser}) => {
             // dataIndex: 'id',
             key: 'id',
             align: 'center',
-            render: (text, user, index) => index + 1
+            width: 80,
+            // (text: data của dataIndex, record(user): object chứa toàn bộ dữ liệu, index)
+            render: (text,_, index) => index + 1
         },
         {
             title: 'First Name',
@@ -80,19 +82,19 @@ const UsersList = ({users, onDeleteUser}) => {
             title: "Last Name",
             dataIndex: 'lastName',
             key: 'lastName',
-            sorter: (a,b) => a.lastName.localeCompare(b.lastName)
         },
         {
             title: "Action",
             key: 'action',
             align: 'center',
+            width: 200,
             render: (_, user) => (
                 <Popconfirm 
                     title="Delete User"
                     description="Are you sure?"
                     onConfirm={() => onDeleteUser(user.id)}
-                    okText="Yes"
-                    cancelText="No"
+                    // okText="Yes"
+                    // cancelText="No"
                 >
                     <Button
                         danger
