@@ -24,6 +24,14 @@ class NewUserForm extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
+        if (!this.state.firstName || !this.state.lastName) {
+            Modal.error({
+                title: 'Lỗi nhập liệu',
+                content: 'Vui lòng nhập đầy đủ First Name và Last Name!',
+                centered: true
+            });
+            return; 
+        }
         this.props.onSubmit({
             firstName: this.state.firstName,
             lastName: this.state.lastName
@@ -84,7 +92,6 @@ class NewUserForm extends Component {
                     okText="Create"
                     cancelText="Cancel"
                     centered
-                    destroyOnHidden
                 >
                     <Form layout='vertical'>
                         <Form.Item label="First Name" required>
@@ -92,7 +99,6 @@ class NewUserForm extends Component {
                                 placeholder='First Name'
                                 value={this.state.firstName}
                                 onChange={this.handleFirstNameChange}
-                                autoFocus
                             />
                         </Form.Item>
 
@@ -103,9 +109,7 @@ class NewUserForm extends Component {
                                 onChange={this.handleLastNameChange}
                             />
                         </Form.Item>
-
                     </Form>
-
                 </Modal>
             </div>
         );

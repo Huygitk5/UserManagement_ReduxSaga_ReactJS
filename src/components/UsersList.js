@@ -93,8 +93,8 @@ const UsersList = ({users, onDeleteUser}) => {
                     title="Delete User"
                     description="Are you sure?"
                     onConfirm={() => onDeleteUser(user.id)}
-                    // okText="Yes"
-                    // cancelText="No"
+                    okText="Yes"
+                    cancelText="No"
                 >
                     <Button
                         danger
@@ -114,7 +114,7 @@ const UsersList = ({users, onDeleteUser}) => {
             dataSource={users}
             rowKey='id'
             bordered
-            pagination={{pageSize: 10}}
+            pagination={{pageSize: 20}}
         />
     )
 };
