@@ -5,7 +5,7 @@ import UsersList from './UsersList';
 import NewUserForm from './NewUserForm';
 // import { Alert, Spinner } from 'reactstrap';
 import { Alert, Spin } from 'antd';
-
+import { LoadingOutlined } from '@ant-design/icons';
 
 class App extends Component {
   constructor(props) {
@@ -51,7 +51,7 @@ class App extends Component {
                 flexDirection: 'column'
             }}>
               {/* <Spinner color="Light" style={{ width: '3rem', height: '3rem'}} /> */}
-              <Spin tip="Loading" size="large"/>
+              <Spin indicator={<LoadingOutlined spin />} size="large"/>
               <span style={{ color: '#ffff' }}>Loading...</span>
               
             </div>
