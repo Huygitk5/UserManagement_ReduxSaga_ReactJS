@@ -3,7 +3,7 @@ import {Types} from '../actions/users';
 const INITIAL_STATE = {
     items: [],
     error: '',
-    isLoading: false
+    isLoading: false,
 };
 
 export default function users(state = INITIAL_STATE, action) {
@@ -14,22 +14,22 @@ export default function users(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 error: '',
-                isLoading: true            
-            }
+                isLoading: true,    
+            };
         case Types.GET_USERS_SUCCESS: {
             return {
                 ...state,
                 items: action.payload.items,
-                isLoading: false
-            }
+                isLoading: false,
+            };
         }
         case Types.USERS_ERROR: {
             console.log(action.payload.error);
             return {
                 ...state,
                 error: action.payload.error,
-                isLoading: false
-            }
+                isLoading: false,
+            };
         }
         default: {
             return state;

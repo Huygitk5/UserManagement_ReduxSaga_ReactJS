@@ -1,40 +1,47 @@
 import React, {Component} from 'react';
-// import {Form, FormGroup, Label, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
-import { Button, Form, Input, Modal } from 'antd';
+import { 
+    Button, 
+    Form, 
+    Input, 
+    Modal, 
+} from 'antd';
 import { UserAddOutlined } from '@ant-design/icons';
 
 class NewUserForm extends Component {
     state = {
         firstName: '',
         lastName: '',
-        isOpen: false
+        isOpen: false,
     };
 
-    handleFirstNameChange = e => {
+    handleFirstNameChange = (e) => {
         this.setState({
-            firstName: e.target.value
-        })
+            firstName: e.target.value,
+        });
     };
 
-    handleLastNameChange = e => {
+    handleLastNameChange =(e) => {
         this.setState({
-            lastName: e.target.value
-        })
+            lastName: e.target.value,
+        });
     };
 
-    handleSubmit = e => {
+    handleSubmit = (e) => {
         e.preventDefault();
-        if (!this.state.firstName || !this.state.lastName) {
+        const { firstName, lastName } = this.state;
+
+        if (!firstName || !lastName) {
             Modal.error({
                 title: 'Lỗi nhập liệu',
                 content: 'Vui lòng nhập đầy đủ First Name và Last Name!',
-                centered: true
+                centered: true,
             });
             return; 
         }
+
         this.props.onSubmit({
-            firstName: this.state.firstName,
-            lastName: this.state.lastName
+            firstName,
+            lastName,
         });
 
         this.setState({
@@ -46,66 +53,40 @@ class NewUserForm extends Component {
 
     handleShowForm = () => {
         this.setState({
-            isOpen: !this.state.isOpen
+            isOpen: !this.state.isOpen,
         });
     };
 
     render() {
+        const { firstName, lastName, isOpen } = this.state;
+
         return (
-            <div style={{marginBottom: '20px', display: 'flex', justifyContent: 'flex-end'}}>
-                {/* <Button outline color='primary' onClick={this.handleShowForm}>
-                        + Add User 
-                </Button>
-                <Modal isOpen={this.state.isOpen} toggle={this.handleShowForm} centered backdrop="static">
-                    <ModalHeader toggle={this.handleShowForm}>
-                        Create User
-                    </ModalHeader>
-                    <Form onSubmit={this.handleSubmit}>
-                        <ModalBody>
-                            <FormGroup>
-                                <Label>First Name</Label>
-                                <Input required placeholder='First Name' onChange={this.handleFirstNameChange} value={this.state.firstName} autoFocus/>
-                            </FormGroup>
-                            <FormGroup>
-                                <Label>Last Name</Label>
-                                <Input required placeholder='Last Name' onChange={this.handleLastNameChange} value={this.state.lastName}/>
-                            </FormGroup>
-                        </ModalBody>
-                        <ModalFooter>
-                            <Button outline type='sumbit' color='primary'>
-                                Create
-                            </Button>
-                            <Button outline color='secondary' onClick={this.handleShowForm}>
-                                Cancel
-                            </Button>
-                        </ModalFooter>
-                    </Form>
-                </Modal> */}
+            <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'flex-end' }}>
                 <Button type='primary' onClick={this.handleShowForm} icon={<UserAddOutlined />}>
                     + Add User
                 </Button>
                 <Modal
                     title="Create User"
-                    open={this.state.isOpen}
+                    open={isOpen}
                     onOk={this.handleSubmit}
                     onCancel={this.handleShowForm}
                     okText="Create"
                     cancelText="Cancel"
                     centered
                 >
-                    <Form layout='vertical'>
+                    <Form layout="vertical">
                         <Form.Item label="First Name" required>
                             <Input 
-                                placeholder='First Name'
-                                value={this.state.firstName}
+                                placeholder="First Name"
+                                value={firstName}
                                 onChange={this.handleFirstNameChange}
                             />
                         </Form.Item>
 
                         <Form.Item label="Last Name" required>
                             <Input 
-                                placeholder='Last Name'
-                                value={this.state.lastName}
+                                placeholder="Last Name"
+                                value={lastName}
                                 onChange={this.handleLastNameChange}
                             />
                         </Form.Item>

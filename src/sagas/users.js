@@ -1,4 +1,11 @@
-import { takeEvery, takeLatest, take, call, fork, put } from "redux-saga/effects";
+import { 
+    takeEvery, 
+    takeLatest, 
+    take, 
+    call, 
+    fork, 
+    put, 
+} from 'redux-saga/effects';
 import * as actions from '../actions/users';
 import * as api from '../api/users';
 
@@ -7,12 +14,12 @@ function* getUsers() {
     try {
         const result = yield call(api.getUsers);
         yield put(actions.getUsersSuccess({
-            items: result.data.data
-        }))
+            items: result.data.data,
+        }));
     } catch(e) {
         yield put(actions.usersError({
-            error: 'An error occurred when trying to get the users'
-        }))
+            error: 'An error occurred when trying to get the users',
+        }));
     }
 }
 
@@ -26,8 +33,8 @@ function* createUser(action) {
         yield call(getUsers);
     } catch(e) {
         yield put(actions.usersError({
-            error: 'An error occurred when trying to create the user'
-        }))
+            error: 'An error occurred when trying to create the user',
+        }));
     }
 }
 
@@ -35,14 +42,14 @@ function* watchCreateUserRequest() {
     yield takeLatest(actions.Types.CREATE_USER_REQUEST, createUser);
 }
 
-function* deleteUser({userId}) {
+function* deleteUser({ userId }) {
     try {
-        yield call(api.deleteUser, userId)
+        yield call(api.deleteUser, userId);
         yield call(getUsers);
     } catch(e) {
         yield put(actions.usersError({
-            error: 'An error occurred when trying to delete the user'
-        }))
+            error: 'An error occurred when trying to delete the user',
+        }));
     }
 }
 
@@ -50,7 +57,7 @@ function* watchDeleteUserRequest() {
     while(true) {
         const action = yield take(actions.Types.DELETE_USER_REQUEST);
         yield call(deleteUser, {
-            userId: action.payload.userId
+            userId: action.payload.userId,
         });
     }
 }
@@ -58,7 +65,7 @@ function* watchDeleteUserRequest() {
 const usersSagas = [
     fork(watchGetUsersRequest),
     fork(watchCreateUserRequest),
-    fork(watchDeleteUserRequest)
+    fork(watchDeleteUserRequest),
 ];
 
 export default usersSagas;

@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/App';
-// import * as serviceWorker from './serviceWOrker';
 import reportWebVitals from './reportWebVitals';
 // import axios from 'axios';
 import reducers from './reducers';
@@ -20,7 +19,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(reducers, applyMiddleware(sagaMiddleware));
 
-sagaMiddleware.run(rootSaga)
+sagaMiddleware.run(rootSaga);
 
 // Chuẩn React 17 bị lỗi
 // ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'))
@@ -29,7 +28,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Provider store={store}>
         <App />
-    </Provider>
+    </Provider>,
 );
 
 // If you want to start measuring performance in your app, pass a function
