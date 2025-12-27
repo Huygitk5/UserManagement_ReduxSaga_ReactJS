@@ -4,10 +4,9 @@ import {
     Button, 
     Popconfirm, 
 } from 'antd';
-import { Component } from 'react';
-
-class UsersList extends Component {
-    columns = [
+// class UsersList extends Component {
+const UsersList = (props) => {
+    const columns = [
         {
             title: '#',
             // dataIndex: 'id',
@@ -43,7 +42,7 @@ class UsersList extends Component {
                 <Popconfirm 
                     title="Delete User"
                     description="Are you sure?"
-                    onConfirm={() => this.props.onDeleteUser(user.id)}
+                    onConfirm={() => props.onDeleteUser(user.id)}
                     okText="Yes"
                     cancelText="No"
                 >
@@ -59,19 +58,15 @@ class UsersList extends Component {
         }
     ];
 
-    render() {
-        const { users } = this.props;
-
-        return (
-            <Table 
-                columns={this.columns}
-                dataSource={users}
-                rowKey="id"
-                bordered
-                pagination={{ pageSize: 20 }}
-            />
-        );
-    }
+    return (
+        <Table 
+            columns={columns}
+            dataSource={props.users}
+            rowKey="id"
+            bordered
+            pagination={{ pageSize: 20 }}
+        />
+    );
 };
 
 export default UsersList;

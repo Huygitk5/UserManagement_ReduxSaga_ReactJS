@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { useState } from 'react';
 import { 
     Button, 
     Form, 
@@ -7,28 +7,35 @@ import {
 } from 'antd';
 import { UserAddOutlined } from '@ant-design/icons';
 
-class NewUserForm extends Component {
-    state = {
-        firstName: '',
-        lastName: '',
-        isOpen: false,
+// class NewUserForm extends Component {
+const NewUserForm = (props) => {
+    // state = {
+    //     firstName: '',
+    //     lastName: '',
+    //     isOpen: false,
+    // };
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
+
+    // handleFirstNameChange = (e) => {
+    //     this.setState({
+    //         firstName: e.target.value,
+    //     });
+    // };
+
+    // handleLastNameChange =(e) => {
+    //     this.setState({
+    //         lastName: e.target.value,
+    //     });
+    // };
+
+    const handleShowForm = () => {
+        setIsOpen(!isOpen);
     };
 
-    handleFirstNameChange = (e) => {
-        this.setState({
-            firstName: e.target.value,
-        });
-    };
-
-    handleLastNameChange =(e) => {
-        this.setState({
-            lastName: e.target.value,
-        });
-    };
-
-    handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        const { firstName, lastName } = this.state;
 
         if (!firstName || !lastName) {
             Modal.error({
@@ -39,62 +46,50 @@ class NewUserForm extends Component {
             return; 
         }
 
-        this.props.onSubmit({
+        props.onSubmit({
             firstName,
             lastName,
         });
 
-        this.setState({
-            firstName: '',
-            lastName: '',
-            isOpen: false
-        });
+        setFirstName('');
+        setLastName('');
+        setIsOpen(false);
     };
 
-    handleShowForm = () => {
-        this.setState({
-            isOpen: !this.state.isOpen,
-        });
-    };
+    return (
+        <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'flex-end' }}>
+            <Button type='primary' onClick={handleShowForm} icon={<UserAddOutlined />}>
+                + Add User
+            </Button>
+            <Modal
+                title="Create User"
+                open={isOpen}
+                onOk={handleSubmit}
+                onCancel={handleShowForm}
+                okText="Create"
+                cancelText="Cancel"
+                centered
+            >
+                <Form layout="vertical">
+                    <Form.Item label="First Name" required>
+                        <Input 
+                            placeholder="First Name"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                        />
+                    </Form.Item>
 
-    render() {
-        const { firstName, lastName, isOpen } = this.state;
-
-        return (
-            <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'flex-end' }}>
-                <Button type='primary' onClick={this.handleShowForm} icon={<UserAddOutlined />}>
-                    + Add User
-                </Button>
-                <Modal
-                    title="Create User"
-                    open={isOpen}
-                    onOk={this.handleSubmit}
-                    onCancel={this.handleShowForm}
-                    okText="Create"
-                    cancelText="Cancel"
-                    centered
-                >
-                    <Form layout="vertical">
-                        <Form.Item label="First Name" required>
-                            <Input 
-                                placeholder="First Name"
-                                value={firstName}
-                                onChange={this.handleFirstNameChange}
-                            />
-                        </Form.Item>
-
-                        <Form.Item label="Last Name" required>
-                            <Input 
-                                placeholder="Last Name"
-                                value={lastName}
-                                onChange={this.handleLastNameChange}
-                            />
-                        </Form.Item>
-                    </Form>
-                </Modal>
-            </div>
-        );
-    }
+                    <Form.Item label="Last Name" required>
+                        <Input 
+                            placeholder="Last Name"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                        />
+                    </Form.Item>
+                </Form>
+            </Modal>
+        </div>
+    );
 }
 
 export default NewUserForm;
