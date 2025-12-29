@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { 
-  getUsersRequest, 
-  createUserRequest, 
-  deleteUserRequest, 
-  usersError, 
+import {
+  getUsersRequest,
+  createUserRequest,
+  deleteUserRequest,
+  usersError,
 } from '../actions/users';
 import AppView from '../components/AppView';
 
@@ -18,10 +18,12 @@ const App = () => {
   }, [dispatch]);
 
   const handleSubmit = ({ firstName, lastName }) => {
-    dispatch(createUserRequest({
-      firstName,
-      lastName,
-    }));
+    dispatch(
+      createUserRequest({
+        firstName,
+        lastName,
+      })
+    );
   };
 
   const handleDeleteUserClick = (userId) => {
@@ -29,13 +31,15 @@ const App = () => {
   };
 
   const handleCloseAlert = () => {
-    dispatch(usersError({
-      error:"",
-    }));
+    dispatch(
+      usersError({
+        error: '',
+      })
+    );
   };
 
   return (
-    <AppView 
+    <AppView
       usersList={users.items}
       isLoading={users.isLoading}
       error={users.error}
@@ -43,7 +47,7 @@ const App = () => {
       onDeleteUser={handleDeleteUserClick}
       onCloseError={handleCloseAlert}
     />
-  )
-}
+  );
+};
 
 export default App;

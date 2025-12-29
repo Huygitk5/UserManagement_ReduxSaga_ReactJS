@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
   Alert,
   Layout,
@@ -10,7 +10,7 @@ import {
   Avatar,
   Breadcrumb,
   Dropdown,
-} from "antd";
+} from 'antd';
 import {
   LoadingOutlined,
   UserOutlined,
@@ -19,32 +19,31 @@ import {
   MenuFoldOutlined,
   DownOutlined,
   LogoutOutlined,
-} from "@ant-design/icons";
-import UsersList from "./UsersList";
-import NewUserForm from "./NewUserForm";
+} from '@ant-design/icons';
+import UsersList from './UsersList';
+import NewUserForm from './NewUserForm';
 
 const { Header, Content, Sider } = Layout;
 
-function getItem(label, key, icon, children) {
-  return {
-    key,
-    label,
-    icon,
-    children,
-  };
-}
+const getItem = (label, key, icon, children) => ({
+  key,
+  label,
+  icon,
+  children,
+});
 
 const items = [
-  getItem("Quản lý User", "sub1", <UserOutlined />, [
-    getItem("Quản lý User", "1"),
+  getItem('Quản lý User', 'sub1', <UserOutlined />, [
+    getItem('Quản lý User', '1'),
   ]),
-  getItem("Tìm User", "2", <SearchOutlined />),
+  getItem('Tìm User', '2', <SearchOutlined />),
 ];
 
 const userMenu = [
-  getItem("Thông tin tài khoảng", "3", <UserOutlined />),
-  getItem("Đăng xuất", "4", <LogoutOutlined />),
+  getItem('Thông tin tài khoản', '3', <UserOutlined />),
+  getItem('Đăng xuất', '4', <LogoutOutlined />),
 ];
+
 const AppView = (props) => {
   const [collapsed, setCollapsed] = useState(false);
   const {
@@ -52,32 +51,32 @@ const AppView = (props) => {
   } = theme.useToken();
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={{ minHeight: '100vh' }}>
       <Sider
         collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
-        width={300}
+        width={'300px'}
       >
         {!collapsed && (
           <img
             src="/sidebar_logo.png"
             alt="Logo"
             style={{
-              display: "block",
-              margin: " 20px auto",
-              width: "90%",
-              maxWidth: "300px",
-              objectFit: "contain",
-              borderRadius: 16,
+              display: 'block',
+              margin: ' 20px auto',
+              width: '90%',
+              maxWidth: '300px',
+              objectFit: 'contain',
+              borderRadius: '16px',
             }}
           />
         )}
 
         <Menu
           theme="dark"
-          defaultSelectedKeys={["1"]}
-          defaultOpenKeys={["sub1"]}
+          defaultSelectedKeys={['1']}
+          defaultOpenKeys={['sub1']}
           mode="inline"
           items={items}
         />
@@ -88,9 +87,9 @@ const AppView = (props) => {
           style={{
             padding: 0,
             background: colorBgContainer,
-            display: "flex",
-            justifyContent: "space-between",
-            paddingRight: "24px",
+            display: 'flex',
+            justifyContent: 'space-between',
+            paddingRight: '24px',
           }}
         >
           <Button
@@ -98,15 +97,15 @@ const AppView = (props) => {
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             onClick={() => setCollapsed(!collapsed)}
             style={{
-              fontSize: "16px",
-              width: 64,
-              height: 64,
+              fontSize: '16px',
+              width: '64px',
+              height: '64px',
             }}
           />
 
-          <Dropdown menu={{ items: userMenu }} trigger={["click"]}>
+          <Dropdown menu={{ items: userMenu }} trigger={['click']}>
             <a onClick={(e) => e.preventDefault()}>
-              <Space style={{ cursor: "pointer" }}>
+              <Space style={{ cursor: 'pointer' }}>
                 <Avatar icon={<UserOutlined />} />
                 <span>Super Admin SSO</span>
                 <DownOutlined />
@@ -117,28 +116,28 @@ const AppView = (props) => {
 
         <Content>
           <Breadcrumb
-            style={{ margin: "16px 16px" }}
-            items={[{ title: "Trang chủ" }, { title: "User  " }]}
+            style={{ margin: '16px 16px' }}
+            items={[{ title: 'Trang chủ' }, { title: 'User' }]}
           />
           <div>
             {props.isLoading && (
               <div
                 style={{
-                  position: "fixed",
+                  position: 'fixed',
                   top: 0,
                   left: 0,
-                  width: "100vw",
-                  height: "100vh",
-                  backgroundColor: "rgba(0, 0, 0, 0.5)",
-                  zIndex: 9999,
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexDirection: "column",
+                  width: '100vw',
+                  height: '100vh',
+                  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                  zIndex: 1,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flexDirection: 'column',
                 }}
               >
                 <Spin indicator={<LoadingOutlined spin />} size="large" />
-                <span style={{ color: "#ffff" }}>Loading...</span>
+                <span style={{ color: '#ffff' }}>Loading...</span>
               </div>
             )}
 

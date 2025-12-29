@@ -1,21 +1,21 @@
-import { DeleteOutlined } from "@ant-design/icons";
-import { Table, Button, Popconfirm, Space } from "antd";
+import { DeleteOutlined } from '@ant-design/icons';
+import { Table, Button, Popconfirm, Space } from 'antd';
 
 const UsersList = (props) => {
   const columns = [
     {
-      title: "#",
+      title: '#',
       // dataIndex: 'id',
-      key: "id",
-      align: "center",
+      key: 'id',
+      align: 'center',
       width: 80,
       // (text: data của dataIndex, record(user): object chứa toàn bộ dữ liệu, index)
       render: (text, _, index) => index + 1,
     },
     {
-      title: "First Name",
-      dataIndex: "firstName",
-      key: "firstName",
+      title: 'First Name',
+      dataIndex: 'firstName',
+      key: 'firstName',
       sorter: (a, b) => {
         const result = a.firstName.localeCompare(b.firstName); //-> 1 0 -1
         if (result !== 0) {
@@ -25,14 +25,14 @@ const UsersList = (props) => {
       },
     },
     {
-      title: "Last Name",
-      dataIndex: "lastName",
-      key: "lastName",
+      title: 'Last Name',
+      dataIndex: 'lastName',
+      key: 'lastName',
     },
     {
-      title: "Action",
-      key: "action",
-      align: "center",
+      title: 'Action',
+      key: 'action',
+      align: 'center',
       width: 200,
       render: (_, user) => (
         <Space>

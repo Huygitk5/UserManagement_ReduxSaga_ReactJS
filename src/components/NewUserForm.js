@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { Button, Form, Input, Modal } from "antd";
-import { UserAddOutlined } from "@ant-design/icons";
+import { useState } from 'react';
+import { Button, Form, Input, Modal } from 'antd';
+import { UserAddOutlined } from '@ant-design/icons';
 
 // class NewUserForm extends Component {
 const NewUserForm = (props) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
   const handleShowForm = () => {
@@ -17,8 +17,8 @@ const NewUserForm = (props) => {
 
     if (!firstName || !lastName) {
       Modal.error({
-        title: "Lỗi nhập liệu",
-        content: "Vui lòng nhập đầy đủ First Name và Last Name!",
+        title: 'Lỗi nhập liệu',
+        content: 'Vui lòng nhập đầy đủ First Name và Last Name!',
         centered: true,
       });
       return;
@@ -29,17 +29,17 @@ const NewUserForm = (props) => {
       lastName,
     });
 
-    setFirstName("");
-    setLastName("");
+    setFirstName('');
+    setLastName('');
     setIsOpen(false);
   };
 
   return (
     <div
       style={{
-        margin: "20px 20px",
-        display: "flex",
-        justifyContent: "flex-end",
+        margin: '20px 20px',
+        display: 'flex',
+        justifyContent: 'flex-end',
       }}
     >
       <Button
